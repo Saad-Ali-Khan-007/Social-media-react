@@ -41,7 +41,6 @@ const Register = () => {
           status: "success",
         });
       });
-      console.log(user);
     } catch (error) {
       console.log(error);
       setUser({ status: "error" });

@@ -1,4 +1,3 @@
-import React from "react";
 import { ReactComponent as Logo } from "./assets/logo.svg";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -19,8 +18,6 @@ const Login = () => {
       [event.target.name]: event.target.value,
     });
   };
-
-  console.log(userLogin);
 
   const handleSubmit = (event) => {
     const userLoginForm = new FormData();
