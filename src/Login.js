@@ -30,7 +30,8 @@ const Login = () => {
         if (response.data.bool === true) {
           localStorage.setItem("userLoginStatus", true);
           localStorage.setItem("user_id", response.data.user_id);
-          window.location.href = "/home";
+          localStorage.setItem("user_name", response.data.user_name);
+          window.location.href = "/home/allpost";
         } else {
           setErrorMsg("Inavlid Email or Password!!");
         }
@@ -43,7 +44,7 @@ const Login = () => {
 
   const userLoginStatus = localStorage.getItem("userLoginStatus");
   if (userLoginStatus === "true") {
-    window.location.href = "/home";
+    window.location.href = "/home/allpost";
   }
 
   useEffect(() => {

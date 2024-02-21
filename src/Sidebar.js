@@ -30,8 +30,8 @@ const Sidebar = () => {
     getData();
   }, []);
   return (
-    <div className="flex flex-col  bg-[#09090A] h-[100vh] fixed top-0 bottom-0">
-      <Link to="/home" className="ml-6 mr-12 mt-10 mb-8">
+    <div className="flex flex-col  bg-[#09090A] h-[100vh]">
+      <Link to="/home/allpost" className="ml-6 mr-12 mt-10 mb-8">
         <Logo />
       </Link>
       <Link className="flex gap-3 ml-6 mr-12 mb-8">
@@ -47,7 +47,7 @@ const Sidebar = () => {
         </div>
       </Link>
       <div>
-        <Link className="flex gap-4  ml-8 mr-12 mb-8">
+        <Link to="/home/allpost" className="flex gap-4  ml-8 mr-12 mb-8">
           <Home />
 
           <h2 className="text-[18px]">Home</h2>
@@ -69,7 +69,7 @@ const Sidebar = () => {
           <h2 className="text-[18px]">CreatePost</h2>
         </Link>
       </div>
-      <Link to="/logout" className="flex gap-4 ml-8 mt-44 mr-12 mb-8">
+      <Link to="/logout" className="flex gap-4 ml-8  mr-12 mb-8">
         <Logout />
         <h2 className="text-[18px]">Logout</h2>
       </Link>

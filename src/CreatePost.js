@@ -14,6 +14,7 @@ const CreatePost = () => {
   });
 
   const user_id = localStorage.getItem("user_id");
+  const user_name = localStorage.getItem("user_name");
 
   const handleChange = (e) => {
     setPost({
@@ -41,6 +42,7 @@ const CreatePost = () => {
   const handleSubmit = (event) => {
     const postData = new FormData();
     postData.append("user", user_id);
+    postData.append("username", user_name);
     postData.append("caption", post.caption);
     postData.append("add_photos", post.add_photos, post.add_photos.name);
     postData.append("add_location", post.add_location);
@@ -54,7 +56,7 @@ const CreatePost = () => {
           },
         })
         .then((response) => {
-          console.log(response.data);
+          window.location.href = "/home/createpost";
         });
     } catch (error) {
       console.log(error);
@@ -64,75 +66,77 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="flex flex-col gap-10 overflow-y-auto ml-96 mt-[4.5rem]">
-      <div className="flex items-center gap-4">
-        <AddPost />
-        <h1 className="text-[30px] font-bold">CreatePost</h1>
-      </div>
-      <div>
-        <div>
-          <h3 className="mb-3 font-bold">Caption</h3>
-          <textarea
-            className="bg-[#101012] rounded-xl focus:outline-[#736ddb]"
-            name="caption"
-            onChange={handleChange}
-            value={post.caption}
-            id="caption"
-            cols="135"
-            rows="7"
-          ></textarea>
+    <div className="overflow-y-scroll h-[100vh]">
+      <div className="flex flex-col gap-10 mr-32 ml-32 mt-[4.5rem]">
+        <div className="flex items-center gap-4">
+          <AddPost />
+          <h1 className="text-[30px] font-bold">CreatePost</h1>
         </div>
         <div>
-          <h3 className="mb-3 mt-4 font-bold">Add Photos</h3>
-          <div
-            className="flex flex-col items-center p-48 bg-[#101012] rounded-xl"
-            onClick={handleImageClick}
-          >
-            {image ? (
-              <img src={URL.createObjectURL(image)} alt="" />
-            ) : (
-              <AddImage />
-            )}
-
-            <input
-              name="add_photos"
-              type="file"
-              ref={inputRef}
-              onChange={handleImageChange}
-              //   value={post.add_photos}
-              style={{ display: "none " }}
-            />
-
-            <p className="text-[#817ce3]">SVG, PNG, JPG</p>
+          <div>
+            <h3 className="mb-3 font-bold">Caption</h3>
+            <textarea
+              className="bg-[#101012] rounded-xl focus:outline-[#736ddb]"
+              name="caption"
+              onChange={handleChange}
+              value={post.caption}
+              id="caption"
+              cols="135"
+              rows="7"
+            ></textarea>
           </div>
           <div>
-            <h3 className="mb-4 mt-6 font-bold">Add Location</h3>
-            <input
-              className="bg-[#101012] p-3 focus:outline-[#736ddb] rounded-[6px] w-[100%]"
-              name="add_location"
-              onChange={handleChange}
-              value={post.add_location}
-            ></input>
-          </div>
-          <div>
-            <h3 className="mb-4 mt-6 font-bold">Add Tags</h3>
-            <input
-              className="bg-[#101012] p-3 focus:outline-[#736ddb] rounded-[6px] w-[100%]"
-              name="add_tags"
-              onChange={handleChange}
-              value={post.add_tags}
-            ></input>
-          </div>
-          <div className="flex justify-end gap-9 mb-16 mt-8">
-            <button className="bg-[#101012] p-3 rounded-[6px] w-[20%] ">
-              Cancel
-            </button>
-            <button
-              onClick={handleSubmit}
-              className="bg-[#6761dd] p-3 rounded-[6px] w-[20%]"
+            <h3 className="mb-3 mt-4 font-bold">Add Photos</h3>
+            <div
+              className="flex flex-col items-center p-48 bg-[#101012] rounded-xl"
+              onClick={handleImageClick}
             >
-              Create Post
-            </button>
+              {image ? (
+                <img src={URL.createObjectURL(image)} alt="" />
+              ) : (
+                <AddImage />
+              )}
+
+              <input
+                name="add_photos"
+                type="file"
+                ref={inputRef}
+                onChange={handleImageChange}
+                //   value={post.add_photos}
+                style={{ display: "none " }}
+              />
+
+              <p className="text-[#817ce3]">SVG, PNG, JPG, WEBP</p>
+            </div>
+            <div>
+              <h3 className="mb-4 mt-6 font-bold">Add Location</h3>
+              <input
+                className="bg-[#101012] p-3 focus:outline-[#736ddb] rounded-[6px] w-[100%]"
+                name="add_location"
+                onChange={handleChange}
+                value={post.add_location}
+              ></input>
+            </div>
+            <div>
+              <h3 className="mb-4 mt-6 font-bold">Add Tags</h3>
+              <input
+                className="bg-[#101012] p-3 focus:outline-[#736ddb] rounded-[6px] w-[100%]"
+                name="add_tags"
+                onChange={handleChange}
+                value={post.add_tags}
+              ></input>
+            </div>
+            <div className="flex justify-end gap-9 mb-16 mt-8">
+              <button className="bg-[#101012] p-3 rounded-[6px] w-[20%] ">
+                Cancel
+              </button>
+              <button
+                onClick={handleSubmit}
+                className="bg-[#6761dd] p-3 rounded-[6px] w-[20%]"
+              >
+                Create Post
+              </button>
+            </div>
           </div>
         </div>
       </div>
