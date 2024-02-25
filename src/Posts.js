@@ -3,23 +3,12 @@ import { ReactComponent as Like } from "./assets/like.svg";
 import { ReactComponent as Save } from "./assets/save.svg";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const baseUrl = "http://localhost:8000/api";
 
 const Posts = () => {
-  const [userData, setUserData] = useState([]);
   const [postData, setPostData] = useState([]);
-
-  const user_id = localStorage.getItem("user_id");
-
-  const getUser = async () => {
-    try {
-      const response = await axios.get(`${baseUrl}/user/${user_id}`);
-      setUserData(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const getTime = (posts) => {
     return new Date(posts.created).toLocaleDateString();
@@ -43,10 +32,8 @@ const Posts = () => {
   };
 
   useEffect(() => {
-    getUser();
     getPost();
   }, []);
-  console.log(postData);
 
   return (
     <div className="overflow-y-scroll w-[100vw] h-[100vh] ">
@@ -70,19 +57,21 @@ const Posts = () => {
                 </p>
               </div>
             </div>
-            <div>
-              <img
-                width={600}
-                // height={1000}
-                src={posts.add_photos}
-                alt="Photo"
-                srcset=""
-              />
-            </div>
-            <div>
-              <p>{getTitle(posts)}</p>
-              <p># {posts.add_tags}</p>
-            </div>
+            <Link to={`/home/post/${posts.id}`}>
+              <div>
+                <img
+                  width={600}
+                  // height={1000}
+                  src={posts.add_photos}
+                  alt=""
+                  srcset=""
+                />
+              </div>
+              <div>
+                <p>{getTitle(posts)}</p>
+                <p># {posts.add_tags}</p>
+              </div>
+            </Link>
             <div className="flex justify-between">
               <Like />
               <Save />

@@ -6,6 +6,7 @@ import Home from "./Home";
 import Logout from "./Logout";
 import CreatePost from "./CreatePost";
 import Posts from "./Posts";
+import PostDetail from "./PostDetail";
 
 const Main = () => {
   return (
@@ -15,6 +16,7 @@ const Main = () => {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/home" element={<Home />}>
           <Route path="allpost" element={<Posts />}></Route>
+          <Route path="post/:post_id" element={<PostDetail />}></Route>
           <Route path="createpost" element={<CreatePost />}></Route>
         </Route>
         <Route path="/logout" element={<Logout />}></Route>

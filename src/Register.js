@@ -50,7 +50,7 @@ const Register = () => {
 
   const userLoginStatus = localStorage.getItem("userLoginStatus");
   if (userLoginStatus === "true") {
-    window.location.href = "/home";
+    window.location.href = "/home/allpost";
   }
 
   useEffect(() => {
