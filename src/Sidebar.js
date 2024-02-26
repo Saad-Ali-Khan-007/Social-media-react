@@ -56,7 +56,7 @@ const Sidebar = () => {
           <Wallpaper />
           <h2 className="text-[18px]">Explore</h2>
         </Link>
-        <Link className="flex gap-4 ml-8 mr-12 mb-8">
+        <Link to="/home/people" className="flex gap-4 ml-8 mr-12 mb-8">
           <People />
           <h2 className="text-[18px]">People</h2>
         </Link>

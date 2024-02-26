@@ -32,12 +32,8 @@ const PostDetail = () => {
 
   return (
     <div className="overflow-y-scroll w-[100vw] h-[100vh] ">
-      <div className="flex flex-col items-center justify-evenly">
-        <div className="mt-[4.5rem] mb-[3rem]">
-          <p className="text-[30px] font-bold">Home Feed</p>
-        </div>
-
-        <div className="flex flex-col gap-4 justify-evenly p-10 border-gray-700 border-[0.001rem]">
+      <div className="flex  items-center justify-evenly">
+        <div className="flex mt-[4.5rem] w-[50%] mb-[3rem] flex-col gap-4 justify-evenly p-10 border-gray-700 border-[0.001rem]">
           <div className="flex gap-3">
             <div>
               <p>Logo</p>
