@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ReactComponent as AddPost } from "./assets/add-post.svg";
 import { ReactComponent as AddImage } from "./assets/file-upload.svg";
 import { useRef, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const baseUrl = "http://localhost:8000/api";
 const CreatePost = () => {
@@ -64,7 +65,9 @@ const CreatePost = () => {
 
     event.preventDefault();
   };
-
+  useEffect(() => {
+    document.title = "Create Post";
+  }, []);
   return (
     <div className="overflow-y-scroll h-[100vh]">
       <div className="flex flex-col gap-10 mr-32 ml-32 mt-[4.5rem]">
@@ -127,9 +130,12 @@ const CreatePost = () => {
               ></input>
             </div>
             <div className="flex justify-end gap-9 mb-16 mt-8">
-              <button className="bg-[#101012] p-3 rounded-[6px] w-[20%] ">
+              <Link
+                to="/home/allpost"
+                className="bg-[#101012] text-center p-3 rounded-[6px] w-[20%] "
+              >
                 Cancel
-              </button>
+              </Link>
               <button
                 onClick={handleSubmit}
                 className="bg-[#6761dd] p-3 rounded-[6px] w-[20%]"

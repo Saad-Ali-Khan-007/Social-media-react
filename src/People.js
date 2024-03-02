@@ -31,14 +31,15 @@ const People = () => {
         </div>
         <div className="flex flex-wrap mb-8">
           {userData.map((users, index) => (
-            <div
+            <Link
+              to={`/home/people/${users.id}`}
               key={index}
               className="flex flex-wrap m-8 w-[25%]  items-center flex-col gap-4 justify-evenly p-10 border-gray-700 border-[0.001rem]"
             >
               <p>Logo</p>
               <p>{users.name}</p>
               <p className="text-[#877EFF]">@{users.username}</p>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

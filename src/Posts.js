@@ -68,7 +68,10 @@ const Posts = () => {
                 />
               </div>
               <div>
-                <p>{getTitle(posts)}</p>
+                <p>
+                  {getTitle(posts)}
+                  {"...."}
+                </p>
                 <p># {posts.add_tags}</p>
               </div>
             </Link>

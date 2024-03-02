@@ -8,6 +8,8 @@ import CreatePost from "./CreatePost";
 import Posts from "./Posts";
 import PostDetail from "./PostDetail";
 import People from "./People";
+import PeopleDetail from "./PeopleDetail";
+import EditUserProfile from "./EditUserProfile";
 
 const Main = () => {
   return (
@@ -19,7 +21,9 @@ const Main = () => {
           <Route path="allpost" element={<Posts />}></Route>
           <Route path="post/:post_id" element={<PostDetail />}></Route>
           <Route path="people" element={<People />}></Route>
+          <Route path="people/:user_id" element={<PeopleDetail />}></Route>
           <Route path="createpost" element={<CreatePost />}></Route>
+          <Route path="editprofile" element={<EditUserProfile />}></Route>
         </Route>
         <Route path="/logout" element={<Logout />}></Route>
       </Routes>
