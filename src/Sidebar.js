@@ -34,12 +34,9 @@ const Sidebar = () => {
       <Link to="/home/allpost" className="ml-6 mr-12 mt-10 mb-8">
         <Logo />
       </Link>
-      <Link className="flex gap-3 ml-6 mr-12 mb-8">
+      <Link to="/home/editprofile" className="flex gap-3 ml-6 mr-12 mb-8">
         <div>
-          <p>
-            Logo
-            {/* {userData.featured_img} */}
-          </p>
+          <img width={100} src={userData?.featured_img}></img>
         </div>
         <div>
           <h2 className="text-xl font-bold">{userData?.name}</h2>

@@ -9,7 +9,13 @@ const baseUrl = "http://localhost:8000/api";
 
 const Posts = () => {
   const [postData, setPostData] = useState([]);
+  const [userData, setUserData] = useState([]);
 
+  const getUsersData = async () => {
+    const response = await axios.get(baseUrl + "/user/");
+    setUserData(response.data);
+  };
+  // console.log(postData);
   const getTime = (posts) => {
     return new Date(posts.created).toLocaleDateString();
   };
@@ -30,8 +36,10 @@ const Posts = () => {
       console.log(error);
     }
   };
-
+  // console.log(postData);
+  console.log(userData);
   useEffect(() => {
+    getUsersData();
     getPost();
   }, []);
 
@@ -41,46 +49,56 @@ const Posts = () => {
         <div className="mt-[4.5rem] mb-[3rem]">
           <p className="text-[30px] font-bold">Home Feed</p>
         </div>
-        {postData.map((posts, index) => (
-          <div
-            key={index}
-            className="flex flex-col gap-4 justify-evenly p-10 border-gray-700 border-[0.001rem]"
-          >
-            <div className="flex gap-3">
-              <div>
-                <p>Logo</p>
+        {postData.map((posts, index) => {
+          const userid = userData.map((user) => user.id);
+          return (
+            <div
+              key={index}
+              className="flex flex-col gap-4 justify-evenly p-10 border-gray-700 border-[0.001rem]"
+            >
+              <div className="flex gap-3">
+                <div>
+                  {userid.find((user) => user == posts.user) ? (
+                    <img
+                      width={100}
+                      src={userData.map((profile) => profile.featured_img)}
+                    ></img>
+                  ) : (
+                    "Logo"
+                  )}
+                </div>
+                <div>
+                  <p>{posts.username}</p>
+                  <p>
+                    {getTime(posts)} - {posts.add_location}
+                  </p>
+                </div>
               </div>
-              <div>
-                <p>{posts.username}</p>
-                <p>
-                  {getTime(posts)} - {posts.add_location}
-                </p>
+              <Link to={`/home/post/${posts.id}`}>
+                <div>
+                  <img
+                    width={600}
+                    // height={1000}
+                    src={posts.add_photos}
+                    alt=""
+                    srcset=""
+                  />
+                </div>
+                <div>
+                  <p>
+                    {getTitle(posts)}
+                    {"...."}
+                  </p>
+                  <p># {posts.add_tags}</p>
+                </div>
+              </Link>
+              <div className="flex justify-between">
+                <Like />
+                <Save />
               </div>
             </div>
-            <Link to={`/home/post/${posts.id}`}>
-              <div>
-                <img
-                  width={600}
-                  // height={1000}
-                  src={posts.add_photos}
-                  alt=""
-                  srcset=""
-                />
-              </div>
-              <div>
-                <p>
-                  {getTitle(posts)}
-                  {"...."}
-                </p>
-                <p># {posts.add_tags}</p>
-              </div>
-            </Link>
-            <div className="flex justify-between">
-              <Like />
-              <Save />
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

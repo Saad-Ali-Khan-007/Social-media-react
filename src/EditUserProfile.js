@@ -1,15 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ReactComponent as Edit } from "./assets/edit.svg";
 import { ReactComponent as AddImage } from "./assets/file-upload.svg";
 import { useRef, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+
+const baseUrl = "http://localhost:8000/api";
 const EditUserProfile = () => {
-  const [profile, setProfile] = useState({});
+  const [profile, setProfile] = useState({
+    name: "",
+    username: "",
+    email: "",
+    password: "",
+    prev_img: "",
+    featured_img: "",
+  });
   const inputRef = useRef(null);
   const [image, setImage] = useState("");
 
   const user_id = localStorage.getItem("user_id");
+
+  const getData = async () => {
+    const response = await axios.get(`${baseUrl}/user/${user_id}`);
+    setProfile({
+      name: response.data.name,
+      username: response.data.username,
+      email: response.data.email,
+      password: response.data.password,
+      prev_img: response.data.featured_img,
+      featured_img: "",
+    });
+  };
+
   const handleChange = (e) => {
     setProfile({
       ...profile,
@@ -29,31 +51,41 @@ const EditUserProfile = () => {
       [e.target.name]: e.target.files[0],
     });
   };
-  //   const handleSubmit = (event) => {
-  //     const postData = new FormData();
-  //     postData.append("user", user_id);
-  //     postData.append("username", user_name);
-  //     postData.append("caption", post.caption);
-  //     postData.append("add_photos", post.add_photos, post.add_photos.name);
-  //     postData.append("add_location", post.add_location);
-  //     postData.append("add_tags", post.add_tags);
+  const handleSubmit = (event) => {
+    const profileData = new FormData();
+    profileData.append("user", user_id);
+    profileData.append("name", profile.name);
+    profileData.append("username", profile.username);
+    profileData.append("email", profile.email);
+    profileData.append("password", profile.password);
+    if (profile.featured_img !== "") {
+      profileData.append(
+        "featured_img",
+        profile.featured_img,
+        profile.featured_img.name
+      );
+    }
 
-  //     try {
-  //       axios
-  //         .post(baseUrl + "/post/", postData, {
-  //           headers: {
-  //             "Content-Type": "multipart/form-data",
-  //           },
-  //         })
-  //         .then((response) => {
-  //           window.location.href = "/home/createpost";
-  //         });
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
+    try {
+      axios
+        .put(baseUrl + "/user/" + user_id, profileData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          window.location.href = "/home/editprofile";
+        });
+    } catch (error) {
+      console.log(error);
+    }
 
-  //     event.preventDefault();
-  //   };
+    event.preventDefault();
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <div className="overflow-y-scroll w-[100vw] h-[100vh]">
@@ -67,18 +99,18 @@ const EditUserProfile = () => {
             <h3 className="mb-3 font-bold">Name</h3>
             <input
               className="bg-[#101012] p-3 focus:outline-[#736ddb] rounded-[6px] w-[100%]"
-              name="add_tags"
+              name="name"
               onChange={handleChange}
-              // value={post.add_tags}
+              value={profile.name}
             ></input>
           </div>
           <div>
             <h3 className="mb-3 font-bold">Username</h3>
             <input
               className="bg-[#101012] p-3 focus:outline-[#736ddb] rounded-[6px] w-[100%]"
-              name="add_tags"
+              name="username"
               onChange={handleChange}
-              // value={post.add_tags}
+              value={profile.username}
             ></input>
           </div>
           <div>
@@ -94,11 +126,11 @@ const EditUserProfile = () => {
               )}
 
               <input
-                name="add_photos"
+                name="featured_img"
                 type="file"
                 ref={inputRef}
                 onChange={handleImageChange}
-                //   value={post.add_photos}
+                // value={profile.prev_img}
                 style={{ display: "none " }}
               />
 
@@ -113,7 +145,7 @@ const EditUserProfile = () => {
                 Cancel
               </Link>
               <button
-                // onClick={handleSubmit}
+                onClick={handleSubmit}
                 className="bg-[#6761dd] p-3 rounded-[6px] w-[20%]"
               >
                 Edit Profile
