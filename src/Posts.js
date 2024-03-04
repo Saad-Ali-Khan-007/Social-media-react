@@ -9,13 +9,13 @@ const baseUrl = "http://localhost:8000/api";
 
 const Posts = () => {
   const [postData, setPostData] = useState([]);
-  const [userData, setUserData] = useState([]);
+  // const [userData, setUserData] = useState([]);
 
-  const getUsersData = async () => {
-    const response = await axios.get(baseUrl + "/user/");
-    setUserData(response.data);
-  };
-  // console.log(postData);
+  // const getUsersData = async () => {
+  //   const response = await axios.get(baseUrl + "/user/");
+  //   setUserData(response.data);
+  // };
+
   const getTime = (posts) => {
     return new Date(posts.created).toLocaleDateString();
   };
@@ -36,10 +36,9 @@ const Posts = () => {
       console.log(error);
     }
   };
-  // console.log(postData);
-  console.log(userData);
+
   useEffect(() => {
-    getUsersData();
+    // getUsersData();
     getPost();
   }, []);
 
@@ -49,8 +48,12 @@ const Posts = () => {
         <div className="mt-[4.5rem] mb-[3rem]">
           <p className="text-[30px] font-bold">Home Feed</p>
         </div>
-        {postData.map((posts, index) => {
-          const userid = userData.map((user) => user.id);
+        {postData.map((post, index) => {
+          // another way to get user data
+          // const currentPostUser = userData.find(
+          //   (user) => user.id === post.user
+          // );
+
           return (
             <div
               key={index}
@@ -58,38 +61,31 @@ const Posts = () => {
             >
               <div className="flex gap-3">
                 <div>
-                  {userid.find((user) => user == posts.user) ? (
-                    <img
-                      width={100}
-                      src={userData.map((profile) => profile.featured_img)}
-                    ></img>
-                  ) : (
-                    "Logo"
-                  )}
+                  <img width={80} alt="Logo" src={post.user.featured_img}></img>
                 </div>
                 <div>
-                  <p>{posts.username}</p>
+                  <p>{post.username}</p>
                   <p>
-                    {getTime(posts)} - {posts.add_location}
+                    {getTime(post)} - {post.add_location}
                   </p>
                 </div>
               </div>
-              <Link to={`/home/post/${posts.id}`}>
+              <Link to={`/home/post/${post.id}`}>
                 <div>
                   <img
                     width={600}
                     // height={1000}
-                    src={posts.add_photos}
+                    src={post.add_photos}
                     alt=""
                     srcset=""
                   />
                 </div>
                 <div>
                   <p>
-                    {getTitle(posts)}
+                    {getTitle(post)}
                     {"...."}
                   </p>
-                  <p># {posts.add_tags}</p>
+                  <p># {post.add_tags}</p>
                 </div>
               </Link>
               <div className="flex justify-between">

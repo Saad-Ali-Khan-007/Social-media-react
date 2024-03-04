@@ -20,11 +20,12 @@ const PostDetail = () => {
       console.log(error);
     }
   };
+  console.log(postData);
 
   const getTime = (postData) => {
     return new Date(postData.created).toLocaleDateString();
   };
-
+  console.log(postData);
   useEffect(() => {
     getPost();
     document.title = "Post";
@@ -36,7 +37,11 @@ const PostDetail = () => {
         <div className="flex mt-[4.5rem] w-[50%] mb-[3rem] flex-col gap-4 justify-evenly p-10 border-gray-700 border-[0.001rem]">
           <div className="flex gap-3">
             <div>
-              <p>Logo</p>
+              <img
+                width={80}
+                alt="Logo"
+                src={postData?.user?.featured_img}
+              ></img>
             </div>
             <div>
               <p>{postData.username}</p>
