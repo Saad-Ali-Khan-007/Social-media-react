@@ -14,6 +14,7 @@ const Register = () => {
     featured_img: "",
     status: "",
   });
+  const [error, setError] = useState(null);
 
   const handleChange = (event) => {
     setUser({
@@ -42,11 +43,12 @@ const Register = () => {
         });
       });
     } catch (error) {
-      console.log(error);
+      setError(error.response.data);
       setUser({ status: "error" });
     }
     event.preventDefault();
   };
+  console.log(error);
 
   const userLoginStatus = localStorage.getItem("userLoginStatus");
   if (userLoginStatus === "true") {
@@ -65,6 +67,11 @@ const Register = () => {
           To use snapgram please enter your details
         </p>
       </div>
+      {error == "ERR_BAD_REQUEST" && (
+        <p className="text-center text-red-500">
+          User with this email already exist Registered
+        </p>
+      )}
       {user.status === "success" && (
         <p className="text-center text-green-500">
           User Successfuly Registered

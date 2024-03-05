@@ -56,7 +56,7 @@ const PostDetail = () => {
             <div>
               {current_user_id == postData?.user?.id ? (
                 <Link
-                  to="/home/editpost"
+                  to={`/home/editpost/${postData.id}`}
                   className="bg-[#6761dd] text-center p-3 rounded-[6px] w-[15%]"
                 >
                   Edit Post

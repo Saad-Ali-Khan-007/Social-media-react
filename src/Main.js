@@ -25,7 +25,7 @@ const Main = () => {
           <Route path="people/:user_id" element={<PeopleDetail />}></Route>
           <Route path="createpost" element={<CreatePost />}></Route>
           <Route path="editprofile" element={<EditUserProfile />}></Route>
-          <Route path="editpost" element={<EditPost />}></Route>
+          <Route path="editpost/:post_id" element={<EditPost />}></Route>
         </Route>
         <Route path="/logout" element={<Logout />}></Route>
       </Routes>

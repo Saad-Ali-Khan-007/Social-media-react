@@ -36,7 +36,11 @@ const People = () => {
               key={index}
               className="flex flex-wrap m-8 w-[25%]  items-center flex-col gap-4 justify-evenly p-10 border-gray-700 border-[0.001rem]"
             >
-              <img width={100} src={users.featured_img}></img>
+              <img
+                className="rounded-[100%]"
+                width={80}
+                src={users.featured_img}
+              ></img>
               <p>{users.name}</p>
               <p className="text-[#877EFF]">@{users.username}</p>
             </Link>
