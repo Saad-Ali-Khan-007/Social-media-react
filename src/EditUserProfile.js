@@ -85,6 +85,7 @@ const EditUserProfile = () => {
 
   useEffect(() => {
     getData();
+    document.title = "Edit Profile";
   }, []);
 
   return (

@@ -30,7 +30,7 @@ const Posts = () => {
 
   const getPost = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/post/`);
+      const response = await axios.get(`${baseUrl}/user-post/`);
       setPostData(response.data);
     } catch (error) {
       console.log(error);
@@ -61,7 +61,12 @@ const Posts = () => {
             >
               <div className="flex gap-3">
                 <div>
-                  <img width={80} alt="Logo" src={post.user.featured_img}></img>
+                  <img
+                    className="rounded-[100%]"
+                    width={50}
+                    alt="Logo"
+                    src={post.user.featured_img}
+                  ></img>
                 </div>
                 <div>
                   <p>{post.username}</p>

@@ -36,7 +36,11 @@ const Sidebar = () => {
       </Link>
       <Link to="/home/editprofile" className="flex gap-3 ml-6 mr-12 mb-8">
         <div>
-          <img width={100} src={userData?.featured_img}></img>
+          <img
+            className="rounded-[100%]"
+            width={100}
+            src={userData?.featured_img}
+          ></img>
         </div>
         <div>
           <h2 className="text-xl font-bold">{userData?.name}</h2>

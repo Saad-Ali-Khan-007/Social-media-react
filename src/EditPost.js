@@ -6,7 +6,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const baseUrl = "http://localhost:8000/api";
-const CreatePost = () => {
+const EditPost = () => {
   const [post, setPost] = useState({
     caption: "",
     add_photos: "",
@@ -66,14 +66,14 @@ const CreatePost = () => {
     event.preventDefault();
   };
   useEffect(() => {
-    document.title = "Create Post";
+    document.title = "Edit Post";
   }, []);
   return (
     <div className="overflow-y-scroll w-[100vw] h-[100vh]">
       <div className="flex flex-col gap-10 mr-32 ml-32 mt-[4.5rem]">
         <div className="flex items-center gap-4">
           <AddPost />
-          <h1 className="text-[30px] font-bold">CreatePost</h1>
+          <h1 className="text-[30px] font-bold">Edit Post</h1>
         </div>
         <div>
           <div>
@@ -148,4 +148,4 @@ const CreatePost = () => {
   );
 };
 
-export default CreatePost;
+export default EditPost;
