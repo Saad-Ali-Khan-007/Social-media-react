@@ -39,6 +39,11 @@ npm install
 
 4. Run the frontend server:
    npm start
+
+## Backend
+
+https://github.com/Saad-Ali-Khan-007/Social-media-drf
+
 5. Set up the backend:
 
 - Navigate to the `server` directory.
